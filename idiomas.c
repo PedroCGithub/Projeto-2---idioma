@@ -11,6 +11,7 @@ const float freq_port[26] = { 14.63, 1.04, 3.88, 4.99, 12.57, 1.02, 1.30, 1.28, 
 const float freq_ing[26] = { 8.167, 1.492, 2.782, 4.253, 12.702, 2.228, 2.015, 6.094, 6.966, 0.153, 0.772, 4.025, 2.406, 6.749, 7.507, 1.929, 0.095, 5.987, 6.327, 9.056, 2.758, 0.978, 2.360, 0.150, 1.974, 0.074
 };
 
+
 void calculoFreq (const char *texto,  int *totalLetras, float freq[26]) {
     int contador[26] = {0};
     *totalLetras = 0;
@@ -39,6 +40,16 @@ float definirIdioma (const char *texto) {
     int totalLetras;
     float freq[26];
 
+    // faz primeiro uma verificação de acentos nas letras do texto, ignora o 'é' pq algumas palavras em ingles derivados do francês podem usar.
+    const char *letrasAcen = "áàâãçêíóôõú";
+    for (int i = 0; texto[i] != '\0'; i++) {
+        // Verifica se o caractere atual está na lista de caracteres
+        if (strchr(letrasAcen, texto[i]) != NULL) {
+            printf("O texto provavelmente esta em portugues\n");
+            return 1;
+        }
+    }
+
     calculoFreq(texto, &totalLetras, freq);
 
     // calcula o valor absoluto da diferença das frequências
@@ -53,13 +64,13 @@ float definirIdioma (const char *texto) {
     } else {
         printf("O texto provavelmente esta em ingles\n");
     }
-    return 0.0;
 }
 
 int main() {
     char texto[1000];
 
-    printf("Digite uma frase: \n");
+    printf("Digite uma frase ou texto: \n");
     fgets(texto, sizeof(texto), stdin);
     definirIdioma(texto);
+    return 0;
 }
