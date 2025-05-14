@@ -41,7 +41,7 @@ float definirIdioma (const char *texto) {
     float freq[26];
 
     // faz primeiro uma verificação de acentos nas letras do texto, ignora o 'é' pq algumas palavras em ingles derivados do francês podem usar.
-    const char *letrasAcen = "áàâãçêíóôõú";
+    const char *letrasAcen = "áâãçêíóôõú";
     for (int i = 0; texto[i] != '\0'; i++) {
         // Verifica se o caractere atual está na lista de caracteres
         if (strchr(letrasAcen, texto[i]) != NULL) {
