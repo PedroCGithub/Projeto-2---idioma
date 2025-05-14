@@ -40,7 +40,7 @@ float definirIdioma (const char *texto) {
     int totalLetras;
     float freq[26];
 
-    // faz primeiro uma verificação de acentos nas letras do texto, ignora o 'é' pq algumas palavras em ingles derivados do francês podem usar.
+    // faz primeiro uma verificação de acentos nas letras do texto, ignora o 'é' e 'à' pq algumas palavras em ingles derivados do francês podem usar.
     const char *letrasAcen = "áâãçêíóôõú";
     for (int i = 0; texto[i] != '\0'; i++) {
         // Verifica se o caractere atual está na lista de caracteres
@@ -51,7 +51,7 @@ float definirIdioma (const char *texto) {
     }
 
     calculoFreq(texto, &totalLetras, freq);
-
+0
     // calcula o valor absoluto da diferença das frequências
     for (int i = 0; i < 26; i++) {
         diff_port_total += fabs(freq[i] - freq_port[i]);
